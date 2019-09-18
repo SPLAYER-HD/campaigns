@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+<!-- 	<classPathEntry location="/home/fitideas/apache-tomcat-8.0.15/lib/ojdbc6.jar" /> -->
+	<classPathEntry location="P:\apache-tomcat-7.0.47\lib\ojdbc6.jar" />
+
+	<context id="context1">
+
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@192.168.1.32:1521:CALIDAD" userId="NAF6"
+			password="123456" />
+		<javaModelGenerator targetPackage="com.fi.crm.campaigns.persistence.model" targetProject="campaigns-persistence" />
+		<sqlMapGenerator targetPackage="com.fi.crm.campaigns.persistence.mappers.xml" targetProject="campaigns-persistence" />
+		<javaClientGenerator targetPackage="com.fi.crm.campaigns.persistence.mappers" targetProject="campaigns-persistence" type="XMLMAPPER" />
+
+		<table schema="NAF6" tableName="ARGETID">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		
+		<table schema="NAF6" tableName="ARGEPRO">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		
+		<table schema="NAF6" tableName="ARGECAN">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		
+		<table schema="NAF6" tableName="PVUSUARIOS">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		
+		<table schema="NAF6" tableName="PVCLIENTES">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="NAF6" tableName="PD_USUARIO">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="NAF6" tableName="ARUNNEG">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="NAF6" tableName="ARINCD">
+			<property name="useActualColumnNames" value="false" />			
+		</table>
+
+		<table schema="CAMPAIGNS" tableName="CP_CONSTANTE">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		
+		<table schema="CAMPAIGNS" tableName="CP_AUTOR">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+		
+		<table schema="CAMPAIGNS" tableName="CP_CAMPANIA">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="CAMPAIGNS" tableName="CP_SEGUIMIENTO">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="CAMPAIGNS" tableName="CP_SEGUIMIENTO_MENSAJE">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="CAMPAIGNS" tableName="CP_CLIENTE">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		 <table schema="CAMPAIGNS" tableName="CP_AUDIT"> 
+		 	<property name="useActualColumnNames" value="false" /> 
+		 </table> 
+		 
+		 <table schema="CAMPAIGNS" tableName="CP_DETALLE_AUDIT"> 
+		 	<property name="useActualColumnNames" value="false" /> 
+		 </table>
+			
+		<table schema="CAMPAIGNS" tableName="CP_ESTADO_SEGUIMIENTO">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="CAMPAIGNS" tableName="CP_PERFIL">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="CAMPAIGNS" tableName="CP_USUARIO_PERFIL">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="CAMPAIGNS" tableName="CP_PERMISO_PERFIL">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+	<!-- Tabla de tiendas especifica para unidades de negocio-->
+		<table tableName="PVTIENDASSVY">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="NAF6" tableName="MARCAS">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+
+		<table schema="NAF6" tableName="ARINDA">
+			<property name="useActualColumnNames" value="false" />
+		</table>
+	</context>
+</generatorConfiguration>

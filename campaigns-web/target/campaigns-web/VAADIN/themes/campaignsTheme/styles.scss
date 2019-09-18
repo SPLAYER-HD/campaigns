@@ -1,0 +1,15 @@
+@import "campaignsTheme.scss";
+@import "addons.scss";
+
+// This file prefixes all rules with the theme name to avoid causing conflicts with other themes.
+// The actual styles should be defined in campaignsTheme.scss
+
+.campaignsTheme {
+  @include addons;
+  @include campaignsTheme;
+
+}
+
+.campaigns_pop-up {
+	background: url(img/bg.jpg) no-repeat center center fixed;
+}

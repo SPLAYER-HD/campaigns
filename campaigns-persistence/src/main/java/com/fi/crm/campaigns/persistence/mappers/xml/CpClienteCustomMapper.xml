@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fi.crm.campaigns.persistence.mappers.CpClienteCustomMapper" >
+  <resultMap id="BaseResultMap" type="com.fi.crm.campaigns.persistence.model.CpCliente" >
+    <id column="CLIENTE_ID" property="clienteId" jdbcType="DECIMAL" />
+    <result column="CAMPANIA_ID" property="campaniaId" jdbcType="DECIMAL" />
+    <result column="TIPO_IDENTIFICACION" property="tipoIdentificacion" jdbcType="VARCHAR" />
+    <result column="IDENTIFICACION" property="identificacion" jdbcType="VARCHAR" />
+    <result column="NOMBRES" property="nombres" jdbcType="VARCHAR" />
+    <result column="APELLIDO1" property="apellido1" jdbcType="VARCHAR" />
+    <result column="APELLIDO2" property="apellido2" jdbcType="VARCHAR" />
+    <result column="INDICATIVO" property="indicativo" jdbcType="VARCHAR" />
+    <result column="TELEFONO" property="telefono" jdbcType="VARCHAR" />
+    <result column="CELULAR" property="celular" jdbcType="VARCHAR" />
+    <result column="GENERO" property="genero" jdbcType="VARCHAR" />
+    <result column="CORREO" property="correo" jdbcType="VARCHAR" />
+    <result column="EXTRA_STR" property="extraStr" jdbcType="VARCHAR" />
+    <result column="EXTRA_NUM" property="extraNum" jdbcType="DECIMAL" />
+    <result column="EXTRA_FECHA" property="extraFecha" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    CLI.CLIENTE_ID, CLI.CAMPANIA_ID, CLI.TIPO_IDENTIFICACION, CLI.IDENTIFICACION, CLI.NOMBRES, CLI.APELLIDO1, 
+    CLI.APELLIDO2, CLI.INDICATIVO, CLI.TELEFONO, CLI.CELULAR, CLI.GENERO, CLI.CORREO, CLI.EXTRA_STR, CLI.EXTRA_NUM, CLI.EXTRA_FECHA
+  </sql>
+  
+  <select id="getClientsByCampaign" resultMap="BaseResultMap" >
+     	SELECT 
+			<include refid="Base_Column_List" /> 
+	  	FROM CP_CLIENTE CLI
+	  	WHERE CLI.CAMPANIA_ID = #{campaignId, jdbcType=DECIMAL} AND 
+	  		(CLI.CLIENTE_ID NOT IN (SELECT S.CLIENTE_ID FROM CP_SEGUIMIENTO S) OR 
+		       (
+		       	CLI.CLIENTE_ID IN 
+		            (
+		                SELECT S1.CLIENTE_ID FROM CP_SEGUIMIENTO S1 INNER JOIN  CP_ESTADO_SEGUIMIENTO ES 
+		                    ON S1.SUBESTADO = ES.ESTADO_ID AND ES.REINTENTAR = 'TRUE' 
+		                WHERE S1.LLAMANDO = 'false' AND S1.ESTADO = #{statusContacted, jdbcType=VARCHAR} AND SYSDATE >= (S1.FECHA_ULT_ESTADO + #{hoursAfterLastStatus, jdbcType=DECIMAL} / 24)
+		            ) 
+		        )
+		        OR 
+		       (CLI.CLIENTE_ID IN 
+		            (
+		                SELECT S2.CLIENTE_ID FROM CP_SEGUIMIENTO S2
+		                WHERE S2.LLAMANDO = 'false' AND S2.ESTADO = #{statusNoContacted, jdbcType=VARCHAR} AND SYSDATE >= (S2.FECHA_ULT_ESTADO + #{hoursAfterLastStatus, jdbcType=DECIMAL} / 24)
+		            )
+		        )
+		     )
+    
+  </select>  
+  
+  <select id="getPendingClientsByContacted" resultMap="BaseResultMap" >
+     	SELECT 
+			<include refid="Base_Column_List" /> 
+	  	FROM CP_CLIENTE CLI INNER JOIN CP_CAMPANIA CP ON CP.CAMPANIA_ID = CLI.CAMPANIA_ID 		
+		WHERE CP.CAMPANIA_ID = #{campaignId, jdbcType=DECIMAL} AND 
+		(CLI.CLIENTE_ID NOT IN (SELECT S.CLIENTE_ID FROM CP_SEGUIMIENTO_MENSAJE S WHERE S.CAMPANIA_ID = CP.CAMPANIA_ID) ) 
+		AND ROWNUM <![CDATA[<=]]> #{rownum, jdbcType=DECIMAL}
+		ORDER BY CLI.CLIENTE_ID
+  </select>  
+
+   
+</mapper>

@@ -1,0 +1,3 @@
+com\fi\crm\campaigns\services\App.class
+com\fi\crm\campaigns\services\email\OnloadMailServlet.class
+com\fi\crm\campaigns\services\twilio\TwilioClient.class

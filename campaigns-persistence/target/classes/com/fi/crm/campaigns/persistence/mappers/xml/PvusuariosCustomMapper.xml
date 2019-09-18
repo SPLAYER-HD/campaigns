@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fi.crm.campaigns.persistence.mappers.PvusuariosCustomMapper" >
+  	<resultMap id="BaseResultMap"
+		type="com.fi.crm.campaigns.common.dto.UserInfoDTO">
+		<id column="full_name" jdbcType="VARCHAR" property="fullName" />
+	</resultMap>
+	
+  <select id="getPasswordEncrypted" parameterType="java.lang.String"  resultType="java.lang.String">          
+    SELECT pvcodifica_clave(UPPER(#{password,jdbcType=VARCHAR})) 
+    FROM dual
+   </select>  
+   
+   <select id="getUserByUserCode" resultMap="BaseResultMap">          
+    (SELECT  NOMBRE as full_name
+    	FROM pvusuarios 
+    		WHERE COD_USUARIO = UPPER(#{userCode,jdbcType=VARCHAR}) ) 
+    UNION 
+    (SELECT DESCRIPCION as full_name
+    	FROM  PD_USUARIO 
+    		WHERE COD_USUARIO = UPPER(#{userCode,jdbcType=VARCHAR}) AND ACTIVO = 1 )
+   </select>  
+</mapper>

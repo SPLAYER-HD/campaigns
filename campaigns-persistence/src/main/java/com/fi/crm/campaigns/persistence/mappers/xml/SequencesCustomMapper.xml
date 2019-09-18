@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fi.crm.campaigns.persistence.mappers.SequencesCustomMapper" >
+	
+    <select id="getCampaignSequence" resultType="java.lang.Integer">          
+   		select SECUENCIA_CP_CAMPANIAS.nextval AS id from dual
+    </select>
+    
+    <select id="getAuthorSequence" resultType="java.lang.Integer">          
+   		select SECUENCIA_CP_AUTOR.nextval AS id from dual
+    </select>
+    
+    <select id="getClientSequence" resultType="java.lang.Integer">          
+   		select SECUENCIA_CP_CLIENTE.nextval AS id from dual
+    </select>
+    
+    <select id="getAuditDetailSequence" resultType="java.lang.Integer">          
+   		select SECUENCIA_CP_DETALLE_AUDIT.nextval AS id from dual
+    </select>
+    
+    <select id="getTracingStatusSequence" resultType="java.lang.Integer">          
+   		select SECUENCIA_CP_ESTADO_SEGUIMIENT.nextval AS id from dual
+    </select>
+    
+    <select id="getAuditInfoSequence" resultType="java.lang.Integer">          
+   		select SECUENCIA_CP_INFO_AUDIT.nextval AS id from dual
+    </select>
+    
+    <select id="getProfileSequence" resultType="java.lang.Integer">          
+   		select SECUENCIA_CP_PERFIL.nextval AS id from dual
+    </select>
+    
+    <select id="getTracingSequence" resultType="java.lang.Integer">          
+   		select SECUENCIA_CP_SEGUIMIENTO.nextval AS id from dual
+    </select>
+    
+    <select id="getTracingMessageSequence" resultType="java.lang.Integer">          
+   		select SECUENCIA_CP_SEGUIMIENTO_MSJ.nextval AS id from dual
+    </select>
+    
+    <select id="getUserProfileSequence" resultType="java.lang.Integer">          
+   		select SECUENCIA_CP_USUARIO_PERFIL.nextval AS id from dual
+    </select>
+    
+</mapper>

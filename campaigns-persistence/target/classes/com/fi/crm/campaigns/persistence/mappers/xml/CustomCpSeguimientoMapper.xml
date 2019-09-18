@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fi.crm.campaigns.persistence.mappers.CustomCpSeguimientoMapper" >
+  <resultMap id="BaseResultMap"
+		type="com.fi.crm.campaigns.persistence.model.CustomCpSeguimiento">
+		<result column="SEGUIMIENTO_ID" property="seguimientoId" jdbcType="DECIMAL" />
+	    <result column="CLIENTE_ID" property="clienteId" jdbcType="DECIMAL" />
+	    <result column="CAMPANIA_ID" property="campaniaId" jdbcType="DECIMAL" />
+	    <result column="ESTADO" property="estado" jdbcType="VARCHAR" />
+	    <result column="SUBESTADO" property="subestado" jdbcType="DECIMAL" />
+	    <result column="FECHA_ULT_ESTADO" property="fechaUltEstado" jdbcType="TIMESTAMP" />
+	    <result column="USUARIO" property="usuario" jdbcType="VARCHAR" />
+	    <result column="OBSERVACIONES" property="observaciones" jdbcType="VARCHAR" />
+	    <result column="DURACION" property="duracion" jdbcType="DECIMAL" />
+	    <result column="LLAMANDO" property="llamando" jdbcType="VARCHAR" />
+	    
+	    <result column="TIPO_IDENTIFICACION" property="tipoIdentificacion" jdbcType="VARCHAR" />
+	    <result column="IDENTIFICACION" property="identificacion" jdbcType="VARCHAR" />
+	    <result column="NOMBRES" property="nombres" jdbcType="VARCHAR" />
+	    <result column="APELLIDO1" property="apellido1" jdbcType="VARCHAR" />
+	    <result column="APELLIDO2" property="apellido2" jdbcType="VARCHAR" />
+	    <result column="INDICATIVO" property="indicativo" jdbcType="VARCHAR" />
+	    <result column="TELEFONO" property="telefono" jdbcType="VARCHAR" />
+	    <result column="CELULAR" property="celular" jdbcType="VARCHAR" />
+	    <result column="GENERO" property="genero" jdbcType="VARCHAR" />
+	    <result column="CORREO" property="correo" jdbcType="VARCHAR" />
+	    <result column="EXTRA_STR" property="extraStr" jdbcType="VARCHAR" />
+	    <result column="EXTRA_NUM" property="extraNum" jdbcType="DECIMAL" />
+	    <result column="EXTRA_FECHA" property="extraFecha" jdbcType="TIMESTAMP" />
+	</resultMap>
+  
+  
+  <sql id="Base_Column_List" >   
+     SEG.SEGUIMIENTO_ID, SEG.CLIENTE_ID, SEG.CAMPANIA_ID, SEG.ESTADO, SEG.SUBESTADO, SEG.FECHA_ULT_ESTADO, SEG.USUARIO, 
+     SEG.OBSERVACIONES, SEG.DURACION, SEG.LLAMANDO, 
+   	 CLI.TIPO_IDENTIFICACION, CLI.IDENTIFICACION, CLI.NOMBRES, CLI.APELLIDO1, 
+     CLI.APELLIDO2, CLI.INDICATIVO, CLI.TELEFONO, CLI.CELULAR, CLI.GENERO, CLI.CORREO, CLI.EXTRA_STR, CLI.EXTRA_NUM, CLI.EXTRA_FECHA 
+  </sql>
+  
+  <select id="getTracingByCampaignId" resultMap="BaseResultMap" >
+      SELECT 
+		<include refid="Base_Column_List" /> 
+		FROM CP_CLIENTE CLI LEFT JOIN CP_SEGUIMIENTO SEG ON CLI.CLIENTE_ID = SEG.CLIENTE_ID
+		WHERE CLI.CAMPANIA_ID = #{campaignId,jdbcType=DECIMAL}
+    
+  </select>
+    
+</mapper>

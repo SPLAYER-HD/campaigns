@@ -1,0 +1,5 @@
+------------------------------------------------------------
+CAMPAÑAS LA RIVIERA
+------------------------------------------------------------
+
+La carpeta de archivos apps copiarla en la raiz de la particion del disco D:

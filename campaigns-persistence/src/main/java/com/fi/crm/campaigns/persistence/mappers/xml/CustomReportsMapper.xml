@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fi.crm.campaigns.persistence.mappers.CustomReportsMapper">
+	<resultMap id="BaseResultMap"
+		type="com.fi.crm.campaigns.persistence.model.CustomPhoneHeaderReport">
+		<id column="CAMPANIA_ID" property="campaniaId" jdbcType="DECIMAL" />
+		<result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
+		<result column="DESCRIPCION" property="descripcion" jdbcType="VARCHAR" />
+		<result column="AUTOR_ID" property="autorId" jdbcType="DECIMAL" />
+		<result column="TIPO" property="tipo" jdbcType="VARCHAR" />
+		<result column="ESTADO" property="estado" jdbcType="VARCHAR" />
+		<result column="INICIO_CAMPANIA" property="inicioCampania"
+			jdbcType="TIMESTAMP" />
+		<result column="FIN_CAMPANIA" property="finCampania" jdbcType="TIMESTAMP" />
+		<result column="INICIO_EVENTO" property="inicioEvento"
+			jdbcType="TIMESTAMP" />
+		<result column="FIN_EVENTO" property="finEvento" jdbcType="TIMESTAMP" />
+		<result column="ASUNTO" property="asunto" jdbcType="VARCHAR" />
+		<result column="MENSAJE" property="mensaje" jdbcType="VARCHAR" />
+		<result column="MARCACION_AUTOMATICA" property="marcacionAutomatica"
+			jdbcType="VARCHAR" />
+		<result column="APROBADOR" property="aprobador" jdbcType="VARCHAR" />
+		<result column="CREADOR" property="creador" jdbcType="VARCHAR" />
+		<result column="NO_CIA" property="noCia" jdbcType="VARCHAR" />
+		<result column="CENTRO" property="centro" jdbcType="VARCHAR" />
+		<result column="NO_CIA_UNID_NEG" property="noCiaUnidNeg"
+			jdbcType="VARCHAR" />
+		<result column="UNIDAD_NEGOCIO" property="unidadNegocio"
+			jdbcType="VARCHAR" />
+		<result column="DOMINIO" property="dominio" jdbcType="VARCHAR" />
+		<result column="MARCA_CODIGO" property="marcaCodigo" jdbcType="VARCHAR" />
+		<result column="NO_ARTI" property="noArti" jdbcType="VARCHAR" />
+		<result column="ASIGNADAS" property="asignadas" jdbcType="DECIMAL" />
+		<result column="REALIZADAS" property="realizadas" jdbcType="DECIMAL" />
+		<result column="PORCENTAJE_REALIZADAS" property="porcentajeRealizadas"
+			jdbcType="DECIMAL" />
+		<result column="EFECTIVAS" property="efectivas" jdbcType="DECIMAL" />
+		<result column="PORCENTAJE_EFECTIVAS" property="porcentajeEfectivas"
+			jdbcType="DECIMAL" />
+		<result column="NO_EFECTIVAS" property="noEfectivas" jdbcType="DECIMAL" />
+		<result column="PORCENTAJE_NO_EFECTIVAS" property="porcentajeNoEfectivas"
+			jdbcType="DECIMAL" />
+
+	</resultMap>
+
+	<resultMap id="EffectiveResultMap"
+		type="com.fi.crm.campaigns.persistence.model.CustomPhoneHeaderReportEffectiveCalls">
+		<id column="CAMPANIA_ID" property="campaniaId" jdbcType="DECIMAL" />
+		<result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
+		<result column="CANTIDAD" property="cantidad" jdbcType="DECIMAL" />
+		<result column="PORCENTAJE" property="porcentaje" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap id="DetailResultMap"
+		type="com.fi.crm.campaigns.persistence.model.CustomPhoneDetailReport">
+		<id column="CAMPANIA_ID" property="campaniaId" jdbcType="DECIMAL" />
+		<result column="TELEFONO" property="telefono" jdbcType="VARCHAR" />
+		<result column="CELULAR" property="celular" jdbcType="VARCHAR" />
+		<result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
+		<result column="ESTADO" property="estado" jdbcType="VARCHAR" />
+		<result column="OBSERVACIONES" property="observaciones" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap id="DetailMessageResultMap" type="com.fi.crm.campaigns.persistence.model.CustomMessageDetailReport">
+		<id column="CAMPANIA_ID" property="campaniaId" jdbcType="DECIMAL" />
+		<result column="TELEFONO" property="telefono" jdbcType="VARCHAR" />
+		<result column="CELULAR" property="celular" jdbcType="VARCHAR" />
+		<result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
+		<result column="CORREO" property="nombre" jdbcType="VARCHAR" />
+		<result column="ESTADO" property="estado" jdbcType="VARCHAR" />
+		<result column="OBSERVACIONES" property="observaciones" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<resultMap id="MessageBaseResultMap"
+		type="com.fi.crm.campaigns.persistence.model.CustomMessageHeaderReport">
+		<id column="CAMPANIA_ID" property="campaniaId" jdbcType="DECIMAL" />
+		<result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
+		<result column="DESCRIPCION" property="descripcion" jdbcType="VARCHAR" />
+		<result column="AUTOR_ID" property="autorId" jdbcType="DECIMAL" />
+		<result column="TIPO" property="tipo" jdbcType="VARCHAR" />
+		<result column="ESTADO" property="estado" jdbcType="VARCHAR" />
+		<result column="INICIO_CAMPANIA" property="inicioCampania"
+			jdbcType="TIMESTAMP" />
+		<result column="FIN_CAMPANIA" property="finCampania" jdbcType="TIMESTAMP" />
+		<result column="INICIO_EVENTO" property="inicioEvento"
+			jdbcType="TIMESTAMP" />
+		<result column="FIN_EVENTO" property="finEvento" jdbcType="TIMESTAMP" />
+		<result column="ASUNTO" property="asunto" jdbcType="VARCHAR" />
+		<result column="MENSAJE" property="mensaje" jdbcType="VARCHAR" />
+		<result column="MARCACION_AUTOMATICA" property="marcacionAutomatica"
+			jdbcType="VARCHAR" />
+		<result column="APROBADOR" property="aprobador" jdbcType="VARCHAR" />
+		<result column="CREADOR" property="creador" jdbcType="VARCHAR" />
+		<result column="NO_CIA" property="noCia" jdbcType="VARCHAR" />
+		<result column="CENTRO" property="centro" jdbcType="VARCHAR" />
+		<result column="NO_CIA_UNID_NEG" property="noCiaUnidNeg"
+			jdbcType="VARCHAR" />
+		<result column="UNIDAD_NEGOCIO" property="unidadNegocio"
+			jdbcType="VARCHAR" />
+		<result column="DOMINIO" property="dominio" jdbcType="VARCHAR" />
+		<result column="MARCA_CODIGO" property="marcaCodigo" jdbcType="VARCHAR" />
+		<result column="NO_ARTI" property="noArti" jdbcType="VARCHAR" />
+		<result column="ASIGNADAS" property="asignadas" jdbcType="DECIMAL" />
+		<result column="REALIZADAS" property="realizadas" jdbcType="DECIMAL" />
+		<result column="PORCENTAJE_REALIZADAS" property="porcentajeRealizadas"
+			jdbcType="DECIMAL" />
+		<result column="EFECTIVAS" property="efectivas" jdbcType="DECIMAL" />
+		<result column="PORCENTAJE_EFECTIVAS" property="porcentajeEfectivas"
+			jdbcType="DECIMAL" />
+		<result column="NO_EFECTIVAS" property="noEfectivas" jdbcType="DECIMAL" />
+		<result column="PORCENTAJE_NO_EFECTIVAS" property="porcentajeNoEfectivas"
+			jdbcType="DECIMAL" />
+
+	</resultMap>
+
+	<resultMap id="clicksResultMap" type="com.fi.crm.campaigns.persistence.model.CustomMessageClicksReport">
+		<result column="TIEMPO" property="tiempo" jdbcType="DECIMAL" />
+		<result column="CANTIDAD" property="cantidad" jdbcType="DECIMAL" />
+		<result column="ABSOLUTO" property="absoluto" jdbcType="DECIMAL" />
+		<result column="RELATIVO" property="relativo" jdbcType="DECIMAL" />
+	</resultMap>
+	
+	<resultMap id="effectivenessMap" type="com.fi.crm.campaigns.persistence.model.CustomMessageEffectivenessReport">
+		<result column="UNIDADES_CLIENTE" property="unidadesCliente" jdbcType="DECIMAL" />
+		<result column="VENTAS_CLIENTE" property="ventasCliente" jdbcType="DECIMAL" />
+		<result column="UNIDADES_TOTALES" property="unidadesTotales" jdbcType="DECIMAL" />
+		<result column="VENTAS_TOTALES" property="ventasTotales" jdbcType="DECIMAL" />
+		<result column="PORCENTAJE_UNIDADES" property="porcentajeUnidades" jdbcType="DECIMAL" />
+		<result column="PORCENTAJE_VENTAS" property="porcentajeVentas" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		CAMPANIA_ID, NOMBRE, DESCRIPCION, AUTOR_ID, TIPO, ESTADO, INICIO_CAMPANIA,
+		FIN_CAMPANIA,
+		INICIO_EVENTO, FIN_EVENTO, ASUNTO, MENSAJE, MARCACION_AUTOMATICA, APROBADOR,
+		CREADOR,
+		NO_CIA, CENTRO, NO_CIA_UNID_NEG, UNIDAD_NEGOCIO, DOMINIO, MARCA_CODIGO,
+		NO_ARTI,
+		ASIGNADAS, REALIZADAS, PORCENTAJE_REALIZADAS, EFECTIVAS, PORCENTAJE_EFECTIVAS,
+		NO_EFECTIVAS, PORCENTAJE_NO_EFECTIVAS
+	</sql>
+
+	<select id="getPhoneHeaderReportByCampaignId" resultMap="BaseResultMap">
+		select CP.CAMPANIA_ID, NOMBRE, DESCRIPCION, AUTOR_ID, TIPO, ESTADO,
+		INICIO_CAMPANIA, FIN_CAMPANIA,
+		INICIO_EVENTO, FIN_EVENTO, ASUNTO, MENSAJE, MARCACION_AUTOMATICA, APROBADOR,
+		CREADOR,
+		NO_CIA, CENTRO, NO_CIA_UNID_NEG, UNIDAD_NEGOCIO, DOMINIO, MARCA_CODIGO,
+		NO_ARTI,
+		asignadas, realizadas, (cpr.realizadas/cpa.asignadas) as
+		porcentaje_realizadas,
+		efectivas,
+		(cpe.efectivas/cpr.realizadas) as
+		porcentaje_efectivas,
+		no_efectivas,
+		(cpne.no_efectivas/cpr.realizadas) as
+		porcentaje_no_efectivas
+		from cp_campania cp join
+		(
+		select cp.campania_id, count(*) asignadas
+		from
+		cp_campania cp inner join cp_cliente cl on
+		(cp.campania_id=cl.campania_id and cp.tipo='PHONE')
+		group by
+		cp.campania_id
+		) cpa on (cp.campania_id=cpa.campania_id) left join
+		(
+		select cp.campania_id, count(*) realizadas
+		from cp_campania cp inner
+		join cp_seguimiento seg on (cp.campania_id=seg.campania_id and
+		cp.tipo='PHONE')
+		group by cp.campania_id
+		) cpr on
+		(cp.campania_id=cpr.campania_id) left join
+		(
+		select cp.campania_id,
+		count(*) efectivas
+		from cp_campania cp inner join cp_seguimiento seg
+		on (cp.campania_id=seg.campania_id and cp.tipo='PHONE' and
+		seg.estado='CONTACTED')
+		group by cp.campania_id
+		) cpe on
+		(cp.campania_id=cpe.campania_id) left join
+		(
+		select cp.campania_id,
+		count(*) no_efectivas
+		from cp_campania cp inner join cp_seguimiento seg
+		on (cp.campania_id=seg.campania_id and cp.tipo='PHONE' and
+		(seg.estado='NOT_CONTACTED' or seg.estado is null))
+		group by
+		cp.campania_id
+		) cpne on (cp.campania_id=cpne.campania_id)
+		where
+		CP.CAMPANIA_ID = #{campaignId,jdbcType=DECIMAL}
+	</select>
+	<select id="getPhoneHeaderReportEffectiveCallsByCampaignId"
+		resultMap="EffectiveResultMap">
+		select cp.campania_id, est_seg.nombre,
+		count(*) cantidad, (count(*)/cpr.realizadas) as
+		porcentaje
+		from cp_campania cp inner join cp_seguimiento seg
+		on (cp.campania_id=seg.campania_id and cp.tipo='PHONE') inner join
+		(
+		select cp.campania_id, count(*) realizadas
+		from cp_campania cp inner
+		join cp_seguimiento seg on (cp.campania_id=seg.campania_id and
+		cp.tipo='PHONE')
+		group by cp.campania_id
+		) cpr on
+		(cp.campania_id=cpr.campania_id)
+		join cp_estado_seguimiento est_seg on
+		(est_seg.estado_id=seg.subestado and seg.estado=est_seg.tipo)
+		where
+		cp.campania_id=#{campaignId,jdbcType=DECIMAL}
+		group by cp.campania_id,
+		est_seg.nombre,cpr.realizadas
+	</select>
+
+	<select id="getPhoneDetailReportByCamapaignId" resultMap="DetailResultMap">
+		select cp.campania_id, cl.telefono, cl.celular, cl.nombres||'
+		'||cl.apellido1||' '||cl.apellido2 as nombre, est_seg.nombre as estado,
+		seg.observaciones
+		from cp_campania cp inner join cp_seguimiento seg
+		on (cp.campania_id=seg.campania_id and cp.tipo='PHONE' and
+		seg.estado='CONTACTED')
+		join cp_estado_seguimiento est_seg on (est_seg.estado_id=seg.subestado and
+		seg.estado=est_seg.tipo)
+		inner join cp_cliente cl on (cp.campania_id=cl.campania_id and
+		seg.campania_id=cl.campania_id and seg.cliente_id=cl.cliente_id)
+		where cp.campania_id=#{campaignId,jdbcType=DECIMAL}
+		order by cl.apellido1, cl.apellido2, cl.nombres
+	</select>
+	
+	<select id="getMessageHeaderReportByCampaignId" resultMap="MessageBaseResultMap">
+		select CP.CAMPANIA_ID, NOMBRE, DESCRIPCION, AUTOR_ID, TIPO, ESTADO,
+		INICIO_CAMPANIA, FIN_CAMPANIA,
+		INICIO_EVENTO, FIN_EVENTO, ASUNTO, MENSAJE, MARCACION_AUTOMATICA, APROBADOR,
+		CREADOR,
+		NO_CIA, CENTRO, NO_CIA_UNID_NEG, UNIDAD_NEGOCIO, DOMINIO, MARCA_CODIGO,
+		NO_ARTI, 
+		asignadas, realizadas, (cpr.realizadas/cpa.asignadas) as porcentaje_realizadas,
+		efectivas, (cpe.efectivas/cpr.realizadas) as porcentaje_efectivas,
+		no_efectivas, (cpne.no_efectivas/cpr.realizadas) as porcentaje_no_efectivas 
+		from cp_campania cp inner join
+		(
+		select cp.campania_id, count(*) asignadas
+		from cp_campania cp inner join cp_cliente cl on (cp.campania_id=cl.campania_id and cp.tipo=#{messageType,jdbcType=VARCHAR})
+		group by cp.campania_id
+		) cpa on (cp.campania_id=cpa.campania_id) left join 
+		(
+		select cp.campania_id, count(*) realizadas
+		from cp_campania cp inner join cp_seguimiento_mensaje seg on (cp.campania_id=seg.campania_id and cp.tipo=#{messageType,jdbcType=VARCHAR})
+		group by cp.campania_id
+		) cpr on (cp.campania_id=cpr.campania_id) left join
+		(
+		select cp.campania_id, count(*) efectivas
+		from cp_campania cp inner join cp_seguimiento_mensaje seg 
+		on (cp.campania_id=seg.campania_id and cp.tipo=#{messageType,jdbcType=VARCHAR} and seg.estado='MSJ_SENT')
+		group by cp.campania_id
+		) cpe on (cp.campania_id=cpe.campania_id) left join
+		(
+		select cp.campania_id, count(*) no_efectivas
+		from cp_campania cp inner join cp_seguimiento_mensaje seg 
+		on (cp.campania_id=seg.campania_id and cp.tipo=#{messageType,jdbcType=VARCHAR} and (seg.estado!='MSJ_SENT' or seg.estado is null))
+		group by cp.campania_id
+		) cpne on (cp.campania_id=cpne.campania_id)	
+		where
+		CP.CAMPANIA_ID = #{campaignId,jdbcType=DECIMAL}
+	</select>
+	<select id="getMessageHeaderReportEffectiveByCampaignId" resultMap="EffectiveResultMap">
+		select cp.campania_id, est_seg.descripcion as nombre, count(*) cantidad, (count(*)/asignadas.asignadas) as porcentaje
+		from cp_campania cp inner join cp_seguimiento_mensaje seg 
+		on (cp.campania_id=seg.campania_id and cp.tipo=#{messageType,jdbcType=VARCHAR})
+		join cp_estado_mensaje est_seg on (est_seg.cod_estado=seg.estado and est_seg.tipo_mensaje=cp.tipo) join 
+		(
+		select cp.campania_id, count(*) asignadas
+				from cp_campania cp inner join cp_cliente cl on (cp.campania_id=cl.campania_id and cp.tipo=#{messageType,jdbcType=VARCHAR})
+				group by cp.campania_id
+		) asignadas on (asignadas.campania_id=cp.campania_id) 
+		where cp.campania_id=#{campaignId,jdbcType=DECIMAL}
+		group by cp.campania_id, est_seg.descripcion, asignadas.asignadas	
+	</select>
+	<select id="getMessageDetailedReportByCampaingId" resultMap="DetailMessageResultMap">
+	select cp.campania_id, cl.telefono, cl.celular, cl.nombres||' '||cl.apellido1||' '||cl.apellido2 as nombre, cl.CORREO, est_seg.descripcion as observaciones
+	from cp_campania cp inner join cp_seguimiento_mensaje seg 
+	on (cp.campania_id=seg.campania_id and cp.tipo=#{messageType,jdbcType=VARCHAR})
+	join cp_estado_mensaje est_seg on (est_seg.cod_estado=seg.estado and est_seg.tipo_mensaje=cp.tipo)
+	inner join cp_cliente cl on (cp.campania_id=cl.campania_id and seg.campania_id=cl.campania_id and seg.cliente_id=cl.cliente_id)
+	and cp.campania_id=#{campaignId,jdbcType=DECIMAL}
+	</select>
+	<select id="getClicksByCampaignId" resultMap="clicksResultMap">
+		select tiempo, count(*) cantidad, count(*)/st.cantidad as absoluto, count(*)/sc.cantidad as relativo
+		from 
+		(
+		select 
+		CASE  
+		  WHEN 24*60*(sm.fecha_ult_estad-cp.inicio_campania) <![CDATA[<=]]>30 THEN 30
+		  WHEN 24*60*(sm.fecha_ult_estad-cp.inicio_campania) between 31 and 60 THEN 60
+		  WHEN 24*60*(sm.fecha_ult_estad-cp.inicio_campania) between 61 and 360 THEN 360
+		  WHEN 24*60*(sm.fecha_ult_estad-cp.inicio_campania) between 361 and 720 THEN 720
+		  WHEN 24*60*(sm.fecha_ult_estad-cp.inicio_campania) between 721 and 1440 THEN 1440
+		  WHEN 24*60*(sm.fecha_ult_estad-cp.inicio_campania) between 1441 and 2880 THEN 2880
+		  ELSE 2881
+		END as tiempo
+		from CP_SEGUIMIENTO_MENSAJE sm inner join cp_campania cp on (cp.campania_id=sm.campania_id)
+		where cp.campania_id=#{campaignId,jdbcType=DECIMAL} and sm.estado='MSJ_SEEN'
+		) sq,
+		(
+		select count(*) cantidad from CP_SEGUIMIENTO_MENSAJE where campania_id=#{campaignId,jdbcType=DECIMAL} and estado='MSJ_SEEN'
+		) sc,
+		(
+		select count(*) cantidad from CP_SEGUIMIENTO_MENSAJE where campania_id=#{campaignId,jdbcType=DECIMAL}
+		) st
+		group by tiempo, sc.cantidad, st.cantidad
+		order by tiempo
+	</select>
+	<select id="getEffectivenessByCampaignIdAndBusinessId" resultMap="effectivenessMap">
+		select unidades_cliente, ventas_cliente, unidades_totales, ventas_totales, 
+		case unidades_totales when 0 then 0 else (unidades_cliente/unidades_totales) end porcentaje_unidades, 
+    	case ventas_totales when 0 then 0 else (ventas_cliente/ventas_totales) end porcentaje_ventas
+		from 
+		(
+		select nvl(sum(d.cantidad),0) unidades_cliente, nvl(sum(d.total_neto),0) ventas_cliente
+		from cp_cliente a , pvclientes b, pvencabezado_movimientos c,pvlineas_movimiento d, arincd e, cp_campania cp
+		where A.IDENTIFICACION = b.no_tarjeta
+		and b.no_cia = '20'
+		and b.no_cia = c.no_cia
+		and b.cod_cliente = C.COD_CLIENTE
+		and c.no_cia = d.no_cia
+		and c.no_transa_mov = d.no_transa_mov
+		and c.fecha between #{startDate,jdbcType=DATE} and #{endDate,jdbcType=DATE}
+		and c.no_cia = e.no_cia
+		and c.centrod = e.centro
+		and a.campania_id=cp.campania_id
+		<if test="businessId != null">
+    		and e.cod_negocio=#{businessId,jdbcType=VARCHAR}
+  		</if>
+		and a.campania_id = #{campaignId,jdbcType=DECIMAL}
+		) clientes_envio,
+		(
+		select nvl(sum(d.cantidad),0) unidades_totales, nvl(sum(d.total_neto),0) ventas_totales
+		from pvclientes b, pvencabezado_movimientos c,pvlineas_movimiento d, arincd e
+		where b.no_cia = '20'
+		and b.no_cia = c.no_cia
+		and b.cod_cliente = C.COD_CLIENTE
+		and c.no_cia = d.no_cia
+		and c.no_transa_mov = d.no_transa_mov
+		and c.fecha between #{startDate,jdbcType=DATE} and #{endDate,jdbcType=DATE}
+		and c.no_cia = e.no_cia
+		and c.centrod = e.centro
+		<if test="businessId != null">
+    		and e.cod_negocio=#{businessId,jdbcType=VARCHAR}
+  		</if>
+		) totales
+	
+	</select>
+</mapper>

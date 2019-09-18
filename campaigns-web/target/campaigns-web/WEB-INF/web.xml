@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>campaigns-web</display-name>
+	<context-param>
+		<description>Vaadin production mode</description>
+		<param-name>productionMode</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<context-param>
+    	<param-name>contextConfigLocation</param-name>
+    	<param-value>WEB-INF/applicationContext.xml</param-value>
+  	</context-param>
+	<listener>
+    	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+ 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+ 	</listener>
+	<!-- <servlet> <servlet-name>Vaadin Application Servlet</servlet-name> <servlet-class>com.vaadin.terminal.gwt.server.ApplicationServlet</servlet-class> 
+		<init-param> <description>Vaadin application class to start</description> 
+		<param-name>application</param-name> <param-value>com.nivi.ngs.web.MyVaadinUI</param-value> 
+		</init-param> </servlet> <servlet-mapping> <servlet-name>Vaadin Application 
+		Servlet</servlet-name> <url-pattern>/*</url-pattern> </servlet-mapping> -->
+		<context-param>  
+		    <param-name>spring.profiles.active</param-name>  
+		    <param-value>dev</param-value>  
+		</context-param>  
+		<context-param>  
+		    <param-name>spring.profiles.default</param-name>  
+		    <param-value>dev</param-value>  
+		</context-param>
+		<context-param>  
+		    <param-name>spring.liveBeansView.mbeanDomain</param-name>  
+		    <param-value>dev</param-value>  
+		</context-param>  
+		<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+		</servlet>
+		<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/html/*</url-pattern>
+		</servlet-mapping>
+	<servlet>
+		<description>
+		</description>
+		<display-name>Log4jInitServlet</display-name>
+		<servlet-name>Log4jInitServlet</servlet-name>
+		<servlet-class>com.fi.crm.campaigns.web.util.Log4jInitServlet</servlet-class>
+		<init-param>
+			<description>
+			</description>
+			<param-name>log4j-properties-location</param-name>
+			<param-value>WEB-INF/log4j.properties</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet>
+	    <description>QuartzLauncher</description>
+	    <display-name>QuartzLauncherServlet</display-name>
+		<servlet-name>QuartzLauncherServlet</servlet-name>
+	  	<servlet-class>com.fi.crm.campaigns.sheduler.LauncherServlet</servlet-class>
+	  	<load-on-startup>1</load-on-startup>	  	
+	</servlet>
+	
+
+	<filter>
+		<filter-name>ShiroFilter</filter-name>
+		<filter-class>org.apache.shiro.web.servlet.IniShiroFilter</filter-class>		
+	</filter>
+
+	<!-- Make sure any request you want accessible to Shiro is filtered. /* 
+		catches all -->
+	<!-- requests. Usually this filter mapping is defined first (before all 
+		others) to -->
+	<!-- ensure that Shiro works in subsequent filters in the filter chain: -->
+	<filter-mapping>
+		<filter-name>ShiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		
+	</filter-mapping>
+	
+</web-app>

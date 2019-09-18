@@ -1,0 +1,9 @@
+D:\workspaces\LaRiviera\Campanias\trunk\campaigns-infrastructure\src\main\java\com\fi\crm\campaigns\infrastructure\testsms\TestSMS.java
+D:\workspaces\LaRiviera\Campanias\trunk\campaigns-infrastructure\src\main\java\com\fi\crm\campaigns\infrastructure\App.java
+D:\workspaces\LaRiviera\Campanias\trunk\campaigns-infrastructure\src\main\java\com\fi\crm\campaigns\infrastructure\exception\ErrorCodesEnum.java
+D:\workspaces\LaRiviera\Campanias\trunk\campaigns-infrastructure\src\main\java\com\fi\crm\campaigns\infrastructure\exception\SecurityException.java
+D:\workspaces\LaRiviera\Campanias\trunk\campaigns-infrastructure\src\main\java\com\fi\crm\campaigns\infrastructure\localization\ServiceLocator.java
+D:\workspaces\LaRiviera\Campanias\trunk\campaigns-infrastructure\src\main\java\com\fi\crm\campaigns\infrastructure\mail\SendEmail.java
+D:\workspaces\LaRiviera\Campanias\trunk\campaigns-infrastructure\src\main\java\com\fi\crm\campaigns\infrastructure\sms\SendSMS.java
+D:\workspaces\LaRiviera\Campanias\trunk\campaigns-infrastructure\src\main\java\com\fi\crm\campaigns\infrastructure\exception\TechnicalException.java
+D:\workspaces\LaRiviera\Campanias\trunk\campaigns-infrastructure\src\main\java\com\fi\crm\campaigns\infrastructure\exception\BusinessException.java

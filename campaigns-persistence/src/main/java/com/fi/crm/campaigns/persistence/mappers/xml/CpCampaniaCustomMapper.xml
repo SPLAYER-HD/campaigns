@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fi.crm.campaigns.persistence.mappers.CpCampaniaCustomMapper" >
+  <resultMap id="BaseResultMap" type="com.fi.crm.campaigns.persistence.model.CpCampania" >   
+    <id column="CAMPANIA_ID" property="campaniaId" jdbcType="DECIMAL" />
+    <result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
+    <result column="DESCRIPCION" property="descripcion" jdbcType="VARCHAR" />
+    <result column="AUTOR_ID" property="autorId" jdbcType="DECIMAL" />
+    <result column="TIPO" property="tipo" jdbcType="VARCHAR" />
+    <result column="ESTADO" property="estado" jdbcType="VARCHAR" />
+    <result column="INICIO_CAMPANIA" property="inicioCampania" jdbcType="TIMESTAMP" />
+    <result column="FIN_CAMPANIA" property="finCampania" jdbcType="TIMESTAMP" />
+    <result column="INICIO_EVENTO" property="inicioEvento" jdbcType="TIMESTAMP" />
+    <result column="FIN_EVENTO" property="finEvento" jdbcType="TIMESTAMP" />
+    <result column="ASUNTO" property="asunto" jdbcType="VARCHAR" />
+    <result column="MENSAJE" property="mensaje" jdbcType="VARCHAR" />
+    <result column="MARCACION_AUTOMATICA" property="marcacionAutomatica" jdbcType="VARCHAR" />
+    <result column="APROBADOR" property="aprobador" jdbcType="VARCHAR" />
+    <result column="CREADOR" property="creador" jdbcType="VARCHAR" />
+    <result column="NO_CIA" property="noCia" jdbcType="VARCHAR" />
+    <result column="CENTRO" property="centro" jdbcType="VARCHAR" />
+    <result column="NO_CIA_UNID_NEG" property="noCiaUnidNeg" jdbcType="VARCHAR" />
+    <result column="UNIDAD_NEGOCIO" property="unidadNegocio" jdbcType="VARCHAR" />
+    <result column="DOMINIO" property="dominio" jdbcType="VARCHAR" />
+    <result column="MARCA_CODIGO" property="marcaCodigo" jdbcType="VARCHAR" />
+    <result column="NO_ARTI" property="noArti" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="CustomResultMap" type="com.fi.crm.campaigns.persistence.model.CustomCpCampania" >   
+    <id column="CAMPANIA_ID" property="campaniaId" jdbcType="DECIMAL" />
+    <result column="NOMBRE" property="nombre" jdbcType="VARCHAR" />
+    <result column="DESCRIPCION" property="descripcion" jdbcType="VARCHAR" />
+    <result column="AUTOR_ID" property="autorId" jdbcType="DECIMAL" />
+    <result column="TIPO" property="tipo" jdbcType="VARCHAR" />
+    <result column="ESTADO" property="estado" jdbcType="VARCHAR" />
+    <result column="INICIO_CAMPANIA" property="inicioCampania" jdbcType="TIMESTAMP" />
+    <result column="FIN_CAMPANIA" property="finCampania" jdbcType="TIMESTAMP" />
+    <result column="INICIO_EVENTO" property="inicioEvento" jdbcType="TIMESTAMP" />
+    <result column="FIN_EVENTO" property="finEvento" jdbcType="TIMESTAMP" />
+    <result column="ASUNTO" property="asunto" jdbcType="VARCHAR" />
+    <result column="MENSAJE" property="mensaje" jdbcType="VARCHAR" />
+    <result column="MARCACION_AUTOMATICA" property="marcacionAutomatica" jdbcType="VARCHAR" />
+    <result column="APROBADOR" property="aprobador" jdbcType="VARCHAR" />
+    <result column="CREADOR" property="creador" jdbcType="VARCHAR" />
+    <result column="NO_CIA" property="noCia" jdbcType="VARCHAR" />
+    <result column="CENTRO" property="centro" jdbcType="VARCHAR" />
+    <result column="NO_CIA_UNID_NEG" property="noCiaUnidNeg" jdbcType="VARCHAR" />
+    <result column="UNIDAD_NEGOCIO" property="unidadNegocio" jdbcType="VARCHAR" />
+    <result column="DOMINIO" property="dominio" jdbcType="VARCHAR" />
+    <result column="MARCA_CODIGO" property="marcaCodigo" jdbcType="VARCHAR" />
+    <result column="NO_ARTI" property="noArti" jdbcType="VARCHAR" />
+    <result column="TOTAL_COUNT" property="totalCount" jdbcType="DECIMAL" />
+    <result column="EFECTIVE_COUNT" property="efectiveCount" jdbcType="DECIMAL" />
+    <result column="SEEN_COUNT" property="seenCount" jdbcType="DECIMAL" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >   
+    CAMPANIA_ID, NOMBRE, DESCRIPCION, AUTOR_ID, TIPO, ESTADO, INICIO_CAMPANIA, FIN_CAMPANIA, 
+    INICIO_EVENTO, FIN_EVENTO, ASUNTO, MENSAJE, MARCACION_AUTOMATICA, APROBADOR, CREADOR, 
+    NO_CIA, CENTRO, NO_CIA_UNID_NEG, UNIDAD_NEGOCIO, DOMINIO, MARCA_CODIGO, NO_ARTI
+  </sql>
+  <sql id="Base_Column_List_Alias" >   
+    CP.CAMPANIA_ID, CP.NOMBRE, CP.DESCRIPCION, CP.AUTOR_ID, CP.TIPO, CP.ESTADO, CP.INICIO_CAMPANIA, CP.FIN_CAMPANIA, 
+    CP.INICIO_EVENTO, CP.FIN_EVENTO, CP.ASUNTO, CP.MENSAJE, CP.MARCACION_AUTOMATICA, CP.APROBADOR, CP.CREADOR, 
+    CP.NO_CIA, CP.CENTRO, CP.NO_CIA_UNID_NEG, CP.UNIDAD_NEGOCIO, CP.DOMINIO, CP.MARCA_CODIGO, CP.NO_ARTI
+  </sql>
+
+  <select id="selectByStateAndTypeAndUser" resultMap="BaseResultMap" >
+      	SELECT 
+		<include refid="Base_Column_List" /> 
+		FROM CP_CAMPANIA CP 
+		WHERE (CP.NO_CIA IS NULL OR CP.CENTRO IS NULL) AND 
+		        CP.ESTADO = #{campaignState,jdbcType=VARCHAR} AND 
+		        CP.TIPO = #{campaignContactType,jdbcType=VARCHAR} AND
+		        CP.INICIO_CAMPANIA <![CDATA[<=]]>  SYSDATE AND 
+		        CP.FIN_CAMPANIA <![CDATA[>=]]>  SYSDATE
+		UNION   
+		SELECT 
+		<include refid="Base_Column_List_Alias" /> 
+		FROM CP_CAMPANIA CP INNER JOIN 
+		(PVUSUARIOS_CENTROD PC INNER JOIN PVUSUARIOS USU ON USU.COD_USUARIO = #{user,jdbcType=VARCHAR} AND PC.COD_USUARIO = USU.COD_USUARIO) 
+		ON PC.NO_CIA = CP.NO_CIA AND PC.CENTRO = CP.CENTRO   
+		WHERE 
+		        CP.ESTADO = #{campaignState,jdbcType=VARCHAR} AND 
+		        CP.TIPO = #{campaignContactType,jdbcType=VARCHAR} AND
+		        CP.INICIO_CAMPANIA <![CDATA[<=]]> SYSDATE AND 
+		        CP.FIN_CAMPANIA <![CDATA[>=]]> SYSDATE
+    
+  </select>
+  
+   <select id="selectByStateAndDate" resultMap="CustomResultMap" >
+      SELECT 
+		<include refid="Base_Column_List" /> 
+		,(SELECT COUNT(*) FROM CP_CLIENTE CLI WHERE CLI.CAMPANIA_ID = CP.CAMPANIA_ID) AS TOTAL_COUNT
+		,(CASE WHEN TIPO = 'PHONE' 
+		            THEN
+		                (SELECT COUNT(*) FROM CP_SEGUIMIENTO SEG WHERE SEG.CAMPANIA_ID = CP.CAMPANIA_ID AND SEG.ESTADO = #{tracingContactedState,jdbcType=VARCHAR})
+		            ELSE 
+		                (SELECT COUNT(*) FROM CP_SEGUIMIENTO_MENSAJE SEGM WHERE SEGM.CAMPANIA_ID = CP.CAMPANIA_ID AND SEGM.ESTADO = #{tracingSentState,jdbcType=VARCHAR} )
+		       END) AS EFECTIVE_COUNT
+		,(CASE WHEN TIPO = 'EMAIL' 
+		            THEN
+		                (SELECT COUNT(*) FROM CP_SEGUIMIENTO_MENSAJE SEGM WHERE SEGM.CAMPANIA_ID = CP.CAMPANIA_ID AND SEGM.ESTADO = #{tracingSeenState,jdbcType=VARCHAR})
+		       END) AS SEEN_COUNT
+	 FROM CP_CAMPANIA CP
+	 WHERE 
+		 <choose>
+	    	<when test="endDate != null">
+		 		( CP.INICIO_CAMPANIA BETWEEN #{startDate,jdbcType=DATE} AND #{endDate,jdbcType=DATE})
+		 	</when>
+		 	<otherwise>
+		 		( CP.INICIO_CAMPANIA <![CDATA[>=]]>  #{startDate,jdbcType=DATE})
+		 	</otherwise> 
+		 </choose>	
+		 <if test="campaignState != null">
+		 	AND CP.ESTADO = #{campaignState.value,jdbcType=VARCHAR}
+	   	 </if>
+	 ORDER BY CP.INICIO_CAMPANIA
+  </select>
+  
+</mapper>
